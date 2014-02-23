@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">	
 <head>
-	<title>Photo sphere with three.js</title>
+	<title>Cluny TBK tour</title>
+	<meta charset="utf-8">
+	<meta name="robots" content="noindex" />
 	<style>
 		body { margin: 0; overflow: hidden; background-color: #000; }
 		.tm  { position: absolute; top: 10px; right: 10px; }
     </style>	
 </head>
+
+<div style='position:absolute'>
+	<button onclick='switchValue(this.innerHTML);'>Zacar'sss</button>
+	<button onclick='switchValue(this.innerHTML);'>Zapointe</button>
+	<button onclick='switchValue(this.innerHTML);'>Zaronde</button>
+	<button onclick='switchValue(this.innerHTML);'>Zabel'sss</button>
+	<button onclick='switchValue(this.innerHTML);'>Pip'sss du bas</button>
+	<button onclick='switchValue(this.innerHTML);'>Circuit MH</button>
+</div>
+
 <body>
 	<div id="sphere"></div>
-
 	<script src="http://threejs.org/build/three.min.js"></script>
 	<script src="js/OrbitControls.js"></script>	
 	<script src="js/Detector.js"></script>		
@@ -28,13 +39,37 @@
 		var renderer = Detector.webgl ? new THREE.WebGLRenderer() : new THREE.CanvasRenderer();
 		renderer.setSize(width, height);
 
-		var sphere = new THREE.Mesh(
-			new THREE.SphereGeometry(100, 20, 20),
-			new THREE.MeshBasicMaterial({
-				map: THREE.ImageUtils.loadTexture('photospheres/bergsjostolen.jpg')
-			})
-		);
-		sphere.scale.x = -1;
+		var geometry = new THREE.SphereGeometry(100, 20, 20);
+	
+		
+		var currentMesh	= null
+		function switchValue(type){
+		currentMesh && scene.remove(currentMesh)
+		
+		
+		if( type === "Zacar'sss" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_cloitre.jpg')});					
+		}else if( type === 'Zapointe' ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_transept.jpg')});			
+		}else if( type === 'Zaronde' ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_zaronde.jpg')});		
+		}else if( type === "Zabel'sss" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_zabels.jpg')});		
+		}else if( type === "Pip'sss du bas" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_pips.jpg')});		
+		}else if( type === 'Circuit MH' ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_circuitmh.jpg')});			
+		}else	console.assert(false)
+			var sphere = new THREE.Mesh(geometry, mesh);
+			sphere.scale.x = -1;
+			scene.add(sphere)
+			currentMesh	= sphere
+			location.hash	= type
+		}
+		var initialType	= location.hash.substr(1)	|| "Zacar'sss"
+		switchValue(initialType)
+		
+			
 		scene.add(sphere);
 
 		var controls = new THREE.OrbitControls(camera);
