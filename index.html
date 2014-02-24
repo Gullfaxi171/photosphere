@@ -22,7 +22,7 @@
 <body>
 	<div id="sphere"></div>
 	<script src="http://threejs.org/build/three.min.js"></script>
-	<script src="js/OrbitControls.js"></script>	
+	<script src="js/CustomOrbitControls.js"></script>
 	<script src="js/Detector.js"></script>		
 	<script>
 
@@ -30,8 +30,13 @@
 
 		var width  = window.innerWidth,
 			height = window.innerHeight;
+		var windowWidth, 
+			windowHeight;
+		var rotateSpeed = -0.5;
 
 		var scene = new THREE.Scene();
+
+		
 
 		var camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000);
 		camera.position.x = 0.1;
@@ -39,7 +44,7 @@
 		var renderer = Detector.webgl ? new THREE.WebGLRenderer() : new THREE.CanvasRenderer();
 		renderer.setSize(width, height);
 
-		var geometry = new THREE.SphereGeometry(100, 20, 20);
+		var geometry = new THREE.SphereGeometry(100, 50, 50);
 	
 		
 		var currentMesh	= null
@@ -72,21 +77,45 @@
 			
 		scene.add(sphere);
 
+		
 		var controls = new THREE.OrbitControls(camera);
 		controls.noPan = true;
 		controls.noZoom = true; 
 		controls.autoRotate = true;
-		controls.autoRotateSpeed = 0.5;
+		controls.autoRotateSpeed = rotateSpeed;
 
 		webglEl.appendChild(renderer.domElement);
 
 		render();
 
 		function render() {
+			updateSize();
 			controls.update();
 			requestAnimationFrame(render);
 			renderer.render(scene, camera);
 		}
+
+
+
+
+
+		// Fonction qui met à jours les tailles des cadres si on redimensionne la fenêtre
+		function updateSize() {
+
+			if (windowWidth != window.innerWidth
+					|| windowHeight != window.innerHeight) {
+
+				windowWidth = window.innerWidth;
+				windowHeight = window.innerHeight;
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize(windowWidth, windowHeight);
+
+			}
+
+		}
+
 
 		function onMouseWheel(event) {
 			event.preventDefault();

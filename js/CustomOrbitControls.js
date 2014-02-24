@@ -4,6 +4,7 @@
  * @author alteredq / http://alteredqualia.com/
  * @author WestLangley / http://github.com/WestLangley
  * @author erich666 / http://erichaines.com
+ * @author gullfaxi171 / http://gullfaxi.fr
  */
 /*global THREE, console */
 
@@ -109,7 +110,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		}
 
-		thetaDelta -= angle;
+		thetaDelta += angle;
 
 	};
 
@@ -121,7 +122,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		}
 
-		phiDelta -= angle;
+		phiDelta += angle;
 
 	};
 
@@ -282,6 +283,9 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	function onMouseDown( event ) {
 
+		// Gullfaxi fix : stopping the autorotate
+		scope.autoRotateSpeed = 0;
+	
 		if ( scope.enabled === false ) { return; }
 		event.preventDefault();
 
@@ -375,6 +379,11 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	function onMouseUp( /* event */ ) {
 
+		// Gullfaxi fix : restarting the autorotate after 5sec	
+		setTimeout(function() {
+			scope.autoRotateSpeed = -0.5;
+		}, 5500);	
+	
 		if ( scope.enabled === false ) return;
 
 		// Greggman fix: https://github.com/greggman/three.js/commit/fde9f9917d6d8381f06bf22cdff766029d1761be
