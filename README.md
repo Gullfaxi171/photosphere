@@ -10,6 +10,7 @@ Added by Florent Gros :
 * Stopping rotation while clicking
 * Restarting rotation 5 secs after releasing the mouse
 * Less deformations with a more meshes (but need better computer)
+* Autoresize the scope while resizing the window
 
 
 You can try my work here : http://cluny.gullfaxi.fr

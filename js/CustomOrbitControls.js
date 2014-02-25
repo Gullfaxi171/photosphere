@@ -97,6 +97,9 @@ THREE.OrbitControls = function ( object, domElement ) {
 	var STATE = { NONE : -1, ROTATE : 0, DOLLY : 1, PAN : 2, TOUCH_ROTATE : 3, TOUCH_DOLLY : 4, TOUCH_PAN : 5 };
 	var state = STATE.NONE;
 
+	// add timer to control auto restart of the autoRotate
+	var timer;
+
 	// events
 
 	var changeEvent = { type: 'change' };
@@ -281,10 +284,27 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	}
 
+
+	// Gullfaxi : 2 functions to start the autorotate and restart it later, with a delay
+	function stopAutoRotate() {
+		scope.autoRotateSpeed = 0;
+	}
+	
+	function restartAutoRotateWithDelay ( delay ) {
+	
+		// clear the previous timer if it is already running
+		clearTimeout(timer);
+		
+		// start a new timer
+		timer = setTimeout(function() {
+			scope.autoRotateSpeed = -0.5;
+		}, delay);	
+	}
+
 	function onMouseDown( event ) {
 
 		// Gullfaxi fix : stopping the autorotate
-		scope.autoRotateSpeed = 0;
+		stopAutoRotate();
 	
 		if ( scope.enabled === false ) { return; }
 		event.preventDefault();
@@ -380,9 +400,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 	function onMouseUp( /* event */ ) {
 
 		// Gullfaxi fix : restarting the autorotate after 5sec	
-		setTimeout(function() {
-			scope.autoRotateSpeed = -0.5;
-		}, 5500);	
+		restartAutoRotateWithDelay(5500);
 	
 		if ( scope.enabled === false ) return;
 
@@ -462,6 +480,9 @@ THREE.OrbitControls = function ( object, domElement ) {
 	}
 	
 	function touchstart( event ) {
+
+		// Gullfaxi fix : stop autorotate while moving
+		stopAutoRotate();
 
 		if ( scope.enabled === false ) { return; }
 
@@ -570,6 +591,9 @@ THREE.OrbitControls = function ( object, domElement ) {
 	}
 
 	function touchend( /* event */ ) {
+
+		// Gullfaxi fix : restarting the autorotate after 5sec	
+		restartAutoRotateWithDelay(5500);
 
 		if ( scope.enabled === false ) { return; }
 
