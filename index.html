@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">	
 <head>
-	<title>Cluny TBK tour</title>
+	<title>TBK tour</title>
 	<meta charset="utf-8">
 	<meta name="robots" content="noindex" />
+	<link rel="stylesheet" href="styles/styles.css" type="text/css">
+	<script type="text/javascript" src="js/menu.js"></script>
 	<style>
 		body { margin: 0; overflow: hidden; background-color: #000; }
 		.tm  { position: absolute; top: 10px; right: 10px; }
@@ -11,12 +13,35 @@
 </head>
 
 <div style='position:absolute'>
-	<button onclick='switchValue(this.innerHTML);'>Zacar'sss</button>
-	<button onclick='switchValue(this.innerHTML);'>Zapointe</button>
-	<button onclick='switchValue(this.innerHTML);'>Zaronde</button>
-	<button onclick='switchValue(this.innerHTML);'>Zabel'sss</button>
-	<button onclick='switchValue(this.innerHTML);'>Pip'sss du bas</button>
-	<button onclick='switchValue(this.innerHTML);'>Circuit MH</button>
+
+<ul id="menu">
+	<li><a>Clun'sss</a>
+		<ul>
+			<li><a href="#Zacar'sss" onclick='switchValue(this.innerHTML);'>Zacar'sss</a></li>
+			<li><a href="#Zapointe" onclick='switchValue(this.innerHTML);'>Zapointe</a></li>
+			<li><a href="#Zaronde" onclick='switchValue(this.innerHTML);'>Zaronde</a></li>
+			<li><a href="#Zabel'sss" onclick='switchValue(this.innerHTML);'>Zabel'sss</a></li>	
+			<li><a href="#Pip'sss du bas" onclick='switchValue(this.innerHTML);'>Pip'sss du bas</a></li>
+			<li><a href="#Circuit MH" onclick='switchValue(this.innerHTML);'>Circuit MH</a></li>
+		</ul>
+	</li>
+
+	<li><a>P3</a>
+		<ul>
+			<li><a href="#Iena" onclick='switchValue(this.innerHTML);'>Iena</a></li>
+			<li><a href="#Salon d'Iena" onclick='switchValue(this.innerHTML);'>Salon d'Iena</a></li>
+		</ul>
+	</li>
+	
+		<li><a>"Paris"</a>
+		<ul>
+			<li><a href="#L'Opéra Garnier" onclick='switchValue(this.innerHTML);'>L'Opéra Garnier</a></li>
+			<li><a href="#La Madeleine" onclick='switchValue(this.innerHTML);'>La Madeleine</a></li>
+		</ul>
+	</li>
+
+</ul>
+
 </div>
 
 <body>
@@ -36,8 +61,6 @@
 
 		var scene = new THREE.Scene();
 
-		
-
 		var camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000);
 		camera.position.x = 0.1;
 
@@ -46,6 +69,23 @@
 
 		var geometry = new THREE.SphereGeometry(100, 50, 50);
 	
+		var texturesHD = ['photospheres/cluny_cloitre.jpg',
+						  'photospheres/cluny_transept.jpg',
+						  'photospheres/cluny_zaronde.jpg',
+						  'photospheres/cluny_zabels.jpg',
+						  'photospheres/cluny_pips.jpg',
+						  'photospheres/cluny_circuitmh.jpg'
+		];
+		
+		var texturesSD = ['photospheres/cluny_cloitre_sd.jpg',
+						  'photospheres/cluny_transept_sd.jpg',
+						  'photospheres/cluny_zaronde_sd.jpg',
+						  'photospheres/cluny_zabels_sd.jpg',
+						  'photospheres/cluny_pips_sd.jpg',
+						  'photospheres/cluny_circuitmh_sd.jpg'
+		];
+		
+		var resHD = 50, resSD = 20;
 		
 		var currentMesh	= null
 		function switchValue(type){
@@ -63,7 +103,15 @@
 		}else if( type === "Pip'sss du bas" ){
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_pips.jpg')});		
 		}else if( type === 'Circuit MH' ){
-				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_circuitmh.jpg')});			
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_circuitmh.jpg')});
+		}else if( type === 'Iena' ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/p3_iena.jpg')});
+		}else if( type === "Salon d'Iena" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/p3_iena_salon_2.jpg')});
+		}else if( type === "L'Opéra Garnier" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/p3_opera.jpg')});
+		}else if( type === "La Madeleine" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/p3_madeleine_2.jpg')});				
 		}else	console.assert(false)
 			var sphere = new THREE.Mesh(geometry, mesh);
 			sphere.scale.x = -1;
@@ -99,7 +147,7 @@
 
 
 
-		// Fonction qui met � jours les tailles des cadres si on redimensionne la fen�tre
+		// Fonction qui met à jours les tailles des cadres si on redimensionne la fenêtre
 		function updateSize() {
 
 			if (windowWidth != window.innerWidth
