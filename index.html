@@ -10,46 +10,76 @@
 		body { margin: 0; overflow: hidden; background-color: #000; }
 		.tm  { position: absolute; top: 10px; right: 10px; }
     </style>	
+	<script src="http://threejs.org/build/three.min.js"></script>
+	<script src="js/CustomOrbitControls.js"></script>
+	<script src="js/Detector.js"></script>	
 </head>
 
-<div style='position:absolute'>
+<body>
+
+<div id="toolbar">
 
 <ul id="menu">
-	<li><a>Clun'sss</a>
+	<li><a>Cluny</a>
 		<ul>
-			<li><a href="#Zacar'sss" onclick='switchValue(this.innerHTML);'>Zacar'sss</a></li>
-			<li><a href="#Zapointe" onclick='switchValue(this.innerHTML);'>Zapointe</a></li>
-			<li><a href="#Zaronde" onclick='switchValue(this.innerHTML);'>Zaronde</a></li>
-			<li><a href="#Zabel'sss" onclick='switchValue(this.innerHTML);'>Zabel'sss</a></li>	
-			<li><a href="#Pip'sss du bas" onclick='switchValue(this.innerHTML);'>Pip'sss du bas</a></li>
-			<li><a href="#Circuit MH" onclick='switchValue(this.innerHTML);'>Circuit MH</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>Le Cloître</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>Le clocher de l'eau bénite</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>La tour ronde</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>Le tilleul d'Abélard</a></li>	
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>Le "Pipelet"</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>L'Abbaye</a></li>
 		</ul>
 	</li>
 
-	<li><a>P3</a>
+	<li><a>Paris</a>
 		<ul>
-			<li><a href="#Iena" onclick='switchValue(this.innerHTML);'>Iena</a></li>
-			<li><a href="#Salon d'Iena" onclick='switchValue(this.innerHTML);'>Salon d'Iena</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>L'hôtel d'Iena</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>Les Salon d'Iena</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>L'Opéra Garnier</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>La Madeleine</a></li>
 		</ul>
 	</li>
 	
-		<li><a>"Paris"</a>
-		<ul>
-			<li><a href="#L'Opéra Garnier" onclick='switchValue(this.innerHTML);'>L'Opéra Garnier</a></li>
-			<li><a href="#La Madeleine" onclick='switchValue(this.innerHTML);'>La Madeleine</a></li>
-		</ul>
+	<li><a>Aix en Provence</a>
 	</li>
 
 </ul>
 
 </div>
 
-<body>
-	<div id="sphere"></div>
-	<script src="http://threejs.org/build/three.min.js"></script>
-	<script src="js/CustomOrbitControls.js"></script>
-	<script src="js/Detector.js"></script>		
+	<a class="image" onclick="cacher()">
+		<img src="images/question.png" alt="Histoire" id="question" />
+	</a>
+	
+	<div id = "encart">
+		<div id = "bandeau"><h3>La zacar'sss</h3></div>	
+		<div id = "texte">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tincidunt placerat felis, vel laoreet massa laoreet quis. Proin ac eros ut elit imperdiet convallis. Fusce dapibus tortor at dui semper convallis. Mauris vel dui vitae ante fermentum sagittis eget id purus. Proin sed leo pharetra, dapibus sem eget, tempus magna. Etiam mollis erat nec nisl sollicitudin pulvinar. Aliquam erat volutpat. Fusce in nibh at eros consectetur dignissim id ac neque. Pellentesque imperdiet, nisi ac hendrerit accumsan, orci urna posuere ligula, congue faucibus nisl leo eget massa. Duis euismod, nisi condimentum consequat dapibus, lectus diam iaculis magna, non tincidunt erat nibh vitae est. Phasellus et enim in leo condimentum volutpat.</p>
+			<p>Duis ac mi justo. Nam vitae nibh dignissim, molestie tellus sed, faucibus nulla. Duis eget laoreet nunc, ac luctus tellus. Fusce blandit urna sed augue pretium, non viverra nibh gravida. Quisque laoreet lacinia leo, a ornare tortor scelerisque et. Proin laoreet convallis lobortis. Ut ultrices dictum feugiat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum dignissim interdum molestie. Integer dignissim pretium urna porta convallis. Suspendisse lectus metus, venenatis nec felis quis, fringilla tempus ante. Integer tortor odio, lobortis id consequat et, sodales eu lorem. Donec quam quam, cursus.</p>
+			<p>Duis ac mi justo. Nam vitae nibh dignissim, molestie tellus sed, faucibus nulla. Duis eget laoreet nunc, ac luctus tellus. Fusce blandit urna sed augue pretium, non viverra nibh gravida. Quisque laoreet lacinia leo, a ornare tortor scelerisque et. Proin laoreet convallis lobortis. Ut ultrices dictum feugiat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum dignissim interdum molestie. Integer dignissim pretium urna porta convallis. Suspendisse lectus metus, venenatis nec felis quis, fringilla tempus ante. Integer tortor odio, lobortis id consequat et, sodales eu lorem. Donec quam quam, cursus.</p>
+		</div>
+	</div>
+
+
+	<div id="sphere"></div>	
 	<script>
+		
+		var encart = 1;
+
+		function cacher()
+		{
+			if( encart == 1 ) {
+				// on cache l'encart et sa molette
+				document.getElementById('encart').style.visibility = "hidden";
+				document.getElementById('encart').style.overflow = "hidden";
+				encart = 0;
+				} else {
+					// on réaffiche l'encart et sa molette
+					document.getElementById('encart').style.visibility = "visible";
+					document.getElementById('encart').style.overflow = "scroll";
+					encart = 1;
+				}
+		}
 
 		var webglEl = document.getElementById('sphere');
 
@@ -91,22 +121,23 @@
 		function switchValue(type){
 		currentMesh && scene.remove(currentMesh)
 		
+		bandeau.innerHTML = "<h3>" + type + "</h3>";
 		
-		if( type === "Zacar'sss" ){
-				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_cloitre.jpg')});					
-		}else if( type === 'Zapointe' ){
-				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_transept.jpg')});			
-		}else if( type === 'Zaronde' ){
+		if( type === "Le Cloître" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_cloitre.jpg')});
+		}else if( type === "Le clocher de l'eau bénite" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_transept.jpg')});
+		}else if( type === "La tour ronde" ){
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_zaronde.jpg')});		
-		}else if( type === "Zabel'sss" ){
+		}else if( type === "Le tilleul d'Abélard" ){
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_zabels.jpg')});		
-		}else if( type === "Pip'sss du bas" ){
+		}else if( type === "Le \"Pipelet\"" ){
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_pips.jpg')});		
-		}else if( type === 'Circuit MH' ){
+		}else if( type === "L'Abbaye" ){
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_circuitmh.jpg')});
-		}else if( type === 'Iena' ){
+		}else if( type === "L'hôtel d'Iena" ){
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/p3_iena.jpg')});
-		}else if( type === "Salon d'Iena" ){
+		}else if( type === "Les Salon d'Iena" ){
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/p3_iena_salon_2.jpg')});
 		}else if( type === "L'Opéra Garnier" ){
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/p3_opera.jpg')});
@@ -119,7 +150,7 @@
 			currentMesh	= sphere
 			location.hash	= type
 		}
-		var initialType	= location.hash.substr(1)	|| "Zacar'sss"
+		var initialType	= location.hash.substr(1)	|| "Le Cloître"
 		switchValue(initialType)
 		
 			
