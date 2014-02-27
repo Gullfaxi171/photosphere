@@ -14,10 +14,19 @@
 	position:absolute;
 	overflow-y:scroll; /* Possibilité de scroll vers le bas uniquement */
 	z-index: 1;
-	background-color: rgba(150, 150, 150, 0.75);
+	background-color: rgba(250, 250, 250, 0.85);
 	
 }
 
+#signature
+{
+	position:absolute;
+	right:10px;
+	bottom:0px;
+	font-family:serif;
+	font-weight:bold;
+	font-size:10px;
+}
 
 #texte
 {
@@ -30,8 +39,8 @@
 	position:absolute;	/* Position fixe de l'image */
 	width:45px;
 	height:45px;
-	top:70px;
-	right:85px;
+	top:10px; /* 70px */
+	right:10px; /* 85px */
 	z-index:2;	/* Image au premier plan */
 }
 
@@ -67,8 +76,8 @@
 {
         display : block; /* on change le type d'élément, les liens deviennent des balises de type block */
         padding : 0; /* aucune marge intérieure */
-        background : #00f; /* couleur de fond */        
-        color : #ff0; /* couleur du texte */
+        background : rgba(0, 0, 0, 0.5); /* couleur de fond */        
+        color: rgba(250, 250, 250, 1);; /* couleur du texte */
         text-decoration : none; /* on supprime le style par défaut des liens (la plupart du temps = souligné) */
         width : 144px; /* largeur */
 }
@@ -122,8 +131,8 @@ html>body #menu li ul ul
 
 #menu a:hover /* Lorsque la souris passe sur un des liens */    
 {
-        color: #00f; /* On passe le texte en noir... */
-        background: #ff0; /* ... et au contraire, le fond en blanc */
+        color: rgba(0, 0, 0, 1);; /* On passe le texte en noir... */
+        background: rgba(250, 250, 250, 0.6); /* ... et au contraire, le fond en blanc */
 }
 
 #menu li:hover ul ul, #menu li.sfhover ul ul /* Sous-sous-listes lorsque la souris passe sur un élément de liste */

@@ -9,20 +9,24 @@
 	<style>
 		body { margin: 0; overflow: hidden; background-color: #000; }
 		.tm  { position: absolute; top: 10px; right: 10px; }
-    </style>	
-	<script src="http://threejs.org/build/three.min.js"></script>
+    </style>
+	<script src="js/three.min.js"></script>
 	<script src="js/CustomOrbitControls.js"></script>
 	<script src="js/Detector.js"></script>	
 </head>
 
 <body>
 
+<div id="signature">
+	<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>
+</div>
+
 <div id="toolbar">
 
 <ul id="menu">
 	<li><a>Cluny</a>
 		<ul>
-			<li><a href="#" onclick='switchValue(this.innerHTML);'>Le Cloître</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>Le cloître</a></li>
 			<li><a href="#" onclick='switchValue(this.innerHTML);'>Le clocher de l'eau bénite</a></li>
 			<li><a href="#" onclick='switchValue(this.innerHTML);'>La tour ronde</a></li>
 			<li><a href="#" onclick='switchValue(this.innerHTML);'>Le tilleul d'Abélard</a></li>	
@@ -41,6 +45,9 @@
 	</li>
 	
 	<li><a>Aix en Provence</a>
+		<ul>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>La Grande Cour</a></li>
+		</ul>
 	</li>
 
 </ul>
@@ -55,8 +62,6 @@
 		<div id = "bandeau"><h3>La zacar'sss</h3></div>	
 		<div id = "texte">
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tincidunt placerat felis, vel laoreet massa laoreet quis. Proin ac eros ut elit imperdiet convallis. Fusce dapibus tortor at dui semper convallis. Mauris vel dui vitae ante fermentum sagittis eget id purus. Proin sed leo pharetra, dapibus sem eget, tempus magna. Etiam mollis erat nec nisl sollicitudin pulvinar. Aliquam erat volutpat. Fusce in nibh at eros consectetur dignissim id ac neque. Pellentesque imperdiet, nisi ac hendrerit accumsan, orci urna posuere ligula, congue faucibus nisl leo eget massa. Duis euismod, nisi condimentum consequat dapibus, lectus diam iaculis magna, non tincidunt erat nibh vitae est. Phasellus et enim in leo condimentum volutpat.</p>
-			<p>Duis ac mi justo. Nam vitae nibh dignissim, molestie tellus sed, faucibus nulla. Duis eget laoreet nunc, ac luctus tellus. Fusce blandit urna sed augue pretium, non viverra nibh gravida. Quisque laoreet lacinia leo, a ornare tortor scelerisque et. Proin laoreet convallis lobortis. Ut ultrices dictum feugiat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum dignissim interdum molestie. Integer dignissim pretium urna porta convallis. Suspendisse lectus metus, venenatis nec felis quis, fringilla tempus ante. Integer tortor odio, lobortis id consequat et, sodales eu lorem. Donec quam quam, cursus.</p>
-			<p>Duis ac mi justo. Nam vitae nibh dignissim, molestie tellus sed, faucibus nulla. Duis eget laoreet nunc, ac luctus tellus. Fusce blandit urna sed augue pretium, non viverra nibh gravida. Quisque laoreet lacinia leo, a ornare tortor scelerisque et. Proin laoreet convallis lobortis. Ut ultrices dictum feugiat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum dignissim interdum molestie. Integer dignissim pretium urna porta convallis. Suspendisse lectus metus, venenatis nec felis quis, fringilla tempus ante. Integer tortor odio, lobortis id consequat et, sodales eu lorem. Donec quam quam, cursus.</p>
 		</div>
 	</div>
 
@@ -64,19 +69,23 @@
 	<div id="sphere"></div>	
 	<script>
 		
-		var encart = 1;
+		var encart = 0;
+		// hide the panel at start
+		document.getElementById('encart').style.visibility = "hidden";
+		document.getElementById('encart').style.overflow = "hidden";
 
+		// function to hide/unhide the history panel
 		function cacher()
 		{
 			if( encart == 1 ) {
-				// on cache l'encart et sa molette
+				// hide panel
 				document.getElementById('encart').style.visibility = "hidden";
 				document.getElementById('encart').style.overflow = "hidden";
 				encart = 0;
 				} else {
-					// on réaffiche l'encart et sa molette
+					// show panel
 					document.getElementById('encart').style.visibility = "visible";
-					document.getElementById('encart').style.overflow = "scroll";
+					document.getElementById('encart').style.overflow = "hidden"; // scroll
 					encart = 1;
 				}
 		}
@@ -123,26 +132,50 @@
 		
 		bandeau.innerHTML = "<h3>" + type + "</h3>";
 		
-		if( type === "Le Cloître" ){
+		if( type === "Le cloître" ){
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_cloitre.jpg')});
+				texte.innerHTML ="<p>Le cloître de l'Abbaye est bien postérieur à l'abbaye. Son apparence actuelle date du XVIIIe siècle et il servait dans le temps de place du marché. Des échoppes étaient disposées en dessous de chaque arche du cloître.</p><p>Sur l'aile nord figure un cadran solaire, on peut y lire \"Ex iis caue\", ce qui signifie \"Méfie-toi de l'une d'entre elles\"</p>";
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
 		}else if( type === "Le clocher de l'eau bénite" ){
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_transept.jpg')});
+				texte.innerHTML ="<p>Le clocher de l'eau bénite, surnommé Zapointe par les élèves de l'École, est le dernier vestige de l'Abbaye de Cluny. L'abbaye a été dynamitée à la révolution, et transformée en carrière qui a permis de construire les batiments avoisinants. Par le passé, il étaient fréquent que des élèves s'aventurent à son sommet pour y hisser un drapeau de l'école, ou un drapeau français (commen en 1918 en soutien aux troupes françaises).</p><p>Le clocher ne fut pas détruit car on pensait à l'époque que s'il s'écroulait, il emporterait avec lui le cloitre et une partie des bâtiments avoisinants. La <a href=\"http://fr.wikipedia.org/wiki/Bande_noire_%28R%C3%A9volution%29\">Bande noire</a>, une association de spéculateurs qui s'est formée pendant la révolution française, s'est chargée de la destruction et de la revente des pierres de l'Abbaye.</p>";
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
 		}else if( type === "La tour ronde" ){
-				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_zaronde.jpg')});		
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_zaronde.jpg')});
+				texte.innerHTML ="<p>Cette tour qui fait l'angle nord-est du parc de l'Abbaye est une ancienne tour de guet qui donne une vue sur toute la vallée de la Grosne.</p><p>Les élèves de l'école la connaissent bien, car elle a été l'abri des Gadz'Arts lors de certaines révoltes étudiantes. On peut lire, en 1908 que :</p><p>\"Le 10 décembre 1898 eut lieu une grande révolte dite de la tour ronde. Un nouveau professeur faisait, à l'École, son cours avec une vitesse telle que personne ne pouvait prendre de notes. Un élève fit une observation au cours, à haute voix. Il fut puni de deux jours de prison, puis renvoyé. Le soir, les viscrits - car c'était leur professeur - à minuit se mutinèrent et allèrent se barricader dans une tour de 30 mètres de hauteur. Pendant deux jours et deux nuits, ils endurèrent les tourments du froid, de la faim et de la soif, puis se rendirent, le 13 au matin. Dans cette bagarre, la troupe (Mâcon) fut appelée ; les gendarmes eurent fort à faire. Vingt-cinq élèves furent renvoyés et un grand nombre de bourses supprimées.\"</p>"
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";	
 		}else if( type === "Le tilleul d'Abélard" ){
-				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_zabels.jpg')});		
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_zabels.jpg')});
+				texte.innerHTML ="<p>Abélard,un poète philosophe de famille noble était tombé amoureux de la nièce de 15 ans du chanoine Fulbert (prêtre à Notre Dame (Paris)). Héloïse était une noble parisienne de la haute aristocratie.Fulbert avait confié à Abélard l'éducation de sa nièce, mais n'était pas d'accord avec ses amours. Après avoir appris qu'ils étaient amoureux, il chassa Abélard de sa maison. Ceux cis se marièrent en secret, Héloïse attendait un enfant, en conséquence Fulbert ordonna la castration d'Abélard pour l'éloigner d'Héloïse. Le seul moyen des amants pour se communiquer était des lettres, Abélard dans un monastère (à Cluny) et Héloïse dans une église de religieuses. C'est grâce à ses lettres que l'on connaît leur histoire. Ils décidèrent de dédier leurs vies au Christ avec l'espoir d'être unis au ciel. Pierre mourut 20 ans avant Héloïse, ses restes furent mis 500 ans après dans la même tombe, maintenant ils reposent ensemble au Cimetière du Père La chaise à Paris.</p><p>Cette histoire hors du commun ne s'arrête pas là : une légende, tenace à Cluny, prétend qu'Abélard ne pouvant se résigner à la perte de ses « bijoux de famille » avait conservés ceux cis et ne s'en séparait jamais même en voyage. A sa mort ces reliques restèrent à Cluny ou l'abbé les fit enterrer au pied d'un tilleul clôturant une allée du parc de l'abbaye.</p><p>Cet arbre vénérable a disparu depuis et été remplacé de nombreuses fois. Dans l'abbaye occupée aujourd'hui par les Arts et Métiers on le connaît toujours sous le nom de tilleul d'Abélard Disparu aujourd'hui personne ne sait ou est passé ce « trésor d'Héloïse » la seule chose que l'on sait c'est qu'il n'est pas au Père Lachaise.</p>"
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
 		}else if( type === "Le \"Pipelet\"" ){
-				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_pips.jpg')});		
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_pips.jpg')});
+				texte.innerHTML ="<p>Le petit édifice qui fait l'entrée est celui qui abritait le concierge, qu'on nomme \"Pipelet\" en patois, ce qui a donné au français le mot \"pipelette\". De l'autre côté, la grande façade dite de Jacques d'Athose donne accès au cloître. Les frontons, originellement destinés à accueillir des bas reliefs napoléoniques n'ont pas été terminés.</p>";
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
 		}else if( type === "L'Abbaye" ){
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_circuitmh.jpg')});
+				texte.innerHTML ="<p>Cette église, aux dimensions peu communes pour l'art roman, est achevée sous l'abbatiat de Pierre le Vénérable et consacrée en 1130. Son principal architecte est Hézelon de Liège. Sa construction aurait pour origine le rêve d'un moine, Gunzo. Saint Pierre lui aurait demandé de dire à Hugues de Semur de bâtir une nouvelle église. L'apôtre lui aurait inspiré le plan de la nouvelle abbaye, qui devait être apte à abriter un millier de moines. Sans ce songe justificateur, Cluny III serait sans doute passé pour un projet trop orgueilleux.</p><p><a href=\"http://architecture.relig.free.fr/cluny.htm\">Source</a></p><p>L'abbaye de Cluny était le plus grand édifice de la chrétienté jusqu'à la construction de Saint-Pierre de Rome.</p>";
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
 		}else if( type === "L'hôtel d'Iena" ){
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/p3_iena.jpg')});
+				texte.innerHTML ="<p>Le plafond du hall d’honneur, orné d’un ciel peint, était à l’origine une verrière éclairant le hall. L’hôtel a été construit autour de ce puits de lumière, les étages supérieurs disposés autour de ce vide. Au 3e étage, la fermeture de cette trémie centrale a permis d’installer les salles des Commissions. Un couloir conduit aux deux chambres des fi ls Bernstein, Robert dans la pièce d’angle, et Henri dans l’autre. Ces pièces, comme les locaux sur cour, sont occupées par Emploi & Carrières.</p><p>Source : Jan Vuillemin (Pa. 40), Arts et Métiers Magazine</p>";
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
 		}else if( type === "Les Salon d'Iena" ){
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/p3_iena_salon_2.jpg')});
+				texte.innerHTML ="<p>A mi-chemin, entre la place de l'Etoile et la tour Eiffel, l'hôtel d'Iéna a le charme des hôtels particuliers de la fin du XIXe siècle. Il est depuis 1925 la Maison des Ingénieurs des Arts & Métiers.</p><p>Désormais ouvert au public, il conserve l'esprit de convivialité des Gadz'Arts et le souvenir d'éminents inventeurs.</p>";
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
 		}else if( type === "L'Opéra Garnier" ){
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/p3_opera.jpg')});
+				texte.innerHTML ="<p>Décidée en 1858 pour remédier à la vétusté et à l’incommodité de la salle de la rue Le Pelletier, la construction du nouvel Opéra de Paris fut le cœur d’une magistrale démonstration de l’urbanisme selon le Second Empire. Sous l’égide du baron Haussmann (préfet de la Seine de 1853 à 1870), l’édifice fut construit pour répondre aux luxueux plaisirs réclamés par le Tout-Paris et la cour impériale. En même temps, il devait être l’un des « phares » dont le baron parsema la capitale pour rythmer les nouvelles voies de circulation. Le quartier alentour fut alors totalement remodelé, faisant disparaître plusieurs hôtels particuliers du XVIIIe siècle.</p><p><a href=\"http://www.histoire-image.org/site/etude_comp/etude_comp_detail.php?i=29#sthash.fldCrASH.dpuf\">Source</a></p><p>L'école de Paris, fondée en 1912 réalisait traditionnellement son prestigieux Gala à l'Opéra Garnier.</p>";
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
 		}else if( type === "La Madeleine" ){
-				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/p3_madeleine_2.jpg')});				
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/p3_madeleine_2.jpg')});
+				texte.innerHTML ="<p>Issu d'un milieu modeste, un ingénieur Arts et Métiers devenu sculpteur va connaître un très grand succès tout au long du XIX° siècle. </p><p>Au salon des Beaux-Arts de 1839, une statue de Velléda obtient un succès considérable, et vaut à son auteur une grande notoriété. Ce jeune sculpteur presque inconnu, qui vient de présenter le modèle en plâtre de son œuvre et va alors recevoir de l'État de nombreuses commandes, c'est Hippolyte Maindron. </p><p>Né à Champtoceaux (Maine-et-Loire) en 1801, II n'a reçu qu'une instruction fort incomplète (…). Il est contraint d'entrer dans le commerce à onze ans, et se retrouve commis dans une maison de Bourbon-Vendée. Mais, déjà, ses dispositions pour le dessin se manifestent d'une manière frappante, et il est admis gracieusement à suivre tes leçons du collège de la ville. Il obtient une bourse du département pour entrer aux Arts et Métiers d'Angers, dont il sortira en août 1823. Après un nouveau passage dans le commerce, il revient comme surveillant à l'École, de 1824 à 1826. </p><p>Ses dispositions évidentes pour la sculpture lui valent une pension du département, pendant trois ans, de 500 F. Cela lui permet de se rendre à Paris et d'être admis à l'École des Beaux-Arts en 1827 David d'Angers, le grand statuaire, lui ouvre les portes de son atelier. Hippolyte Maindron va l'aider dans l'exécution du fronton du Panthéon. </p><p>Le catalogue des œuvres de Maindron est impressionnant, et toutes ne sont pas dans les musées. Ainsi, à l'église de La Madeleine, sous le portique latéral de droite, se trouve une statue en pierre de 3,17 m de haut : saint Grégoire de Valois (la douzième en partant de la façade) </p>";
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
+		}else if( type === "La Grande Cour" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/kin_grandecour.jpg')});
+				texte.innerHTML ="<p>Suite au développement des chemins de fer, des bateaux à vapeur, de la construction d’ouvrages d’art, et des activités portuaires, le Ministère du Commerce demanda en 1838 l’avis aux élus du sud quant à l’installation d’une École d’Arts et Métiers dans leur région. Une intense compétition s’installa alors entre Nîmes, Marseille, Aix et Toulouse. Cette dernière remportait le maximum des suffrages en raison de sa localisation à mi-chemin entre les deux mers. Seulement, la ville n’avait pas de bâtiment libre facilement transformable et à peu de frais. Nîmes fut écartée en raison de sa faible industrialisation et la modeste subvention offerte par la ville. Restaient alors en compétition Marseille et Aix, cette dernière ayant l’avantage d’avoir un bâtiment libre : un monastère transformé en collège sous la Restauration.</p><p>C’est en 1843 que la Chambre vota la création d’une troisième École d’Arts et Métiers à Aix. Ainsi, Elle produirait le personnel nécessaire aux industries métallurgiques et mécaniques du sud, au P.L.M., à la marine marchande et à la marine nationale (dans les années 1860, plus de la moitié des officiers mécaniciens de la marine étaient issus des Écoles d’Arts et Métiers).</p>";
+				signature.innerHTML ="<p>BigBlackMan 163 Clun's 211 - Sory Traore</p>";
 		}else	console.assert(false)
 			var sphere = new THREE.Mesh(geometry, mesh);
 			sphere.scale.x = -1;
@@ -150,7 +183,7 @@
 			currentMesh	= sphere
 			location.hash	= type
 		}
-		var initialType	= location.hash.substr(1)	|| "Le Cloître"
+		var initialType	= location.hash.substr(1)	|| "Le cloître"
 		switchValue(initialType)
 		
 			
