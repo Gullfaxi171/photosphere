@@ -44,6 +44,54 @@
 	z-index:2;	/* Image au premier plan */
 }
 
+#info
+{
+	cursor:pointer; /* Rend l'image cliquable même sans href */
+	position:absolute;	/* Position fixe de l'image */
+	width:45px;
+	height:45px;
+	top:65px; /* 70px */
+	right:10px; /* 85px */
+	z-index:3;	/* Image au premier plan */
+}
+
+#immersion
+{
+	cursor:pointer; /* Rend l'image cliquable même sans href */
+	position:absolute;	/* Position fixe de l'image */
+	width:45px;
+	height:45px;
+	top:110px; /* 70px */
+	right:10px; /* 85px */
+	z-index:2;	/* Image au premier plan */
+}
+
+#fondinfo{
+	top:0px;
+	right:0px;
+	left:0px;
+	bottom:0px;
+	z-index:1;
+	background-color: rgba(25, 25, 25, 0.4);
+	position:absolute;
+}
+
+#panneauinfo{
+	top:20%;
+	right:20%;
+	left:20%;
+	bottom:20%;
+	z-index:2;
+	background-color: rgba(200, 200, 200, 0.7);
+	position:absolute;
+	padding-right:15px;
+	padding-left:15px;
+	padding-bottom:15px;
+	padding-top:15px;
+	overflow:scroll;
+	overflow:hidden;
+}
+
 .image
 {
 	border:none;

@@ -10,17 +10,59 @@
 		body { margin: 0; overflow: hidden; background-color: #000; }
 		.tm  { position: absolute; top: 10px; right: 10px; }
     </style>
-	<script src="js/three.min.js"></script>
-	<script src="js/CustomOrbitControls.js"></script>
-	<script src="js/Detector.js"></script>	
+	<script type="text/javascript" src="js/three.min.js"></script>
+	<script type="text/javascript" src="js/CustomOrbitControls.js"></script>
+	<script type="text/javascript" src="js/Detector.js"></script>
+	
+	<script type="text/javascript">
+		function melgen(a){
+
+			document.write(a);
+		}
+	</script>	
 </head>
 
 <body>
 
+<!--// Maker of the picture, at the bottom right of the page -->
 <div id="signature">
 	<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>
 </div>
 
+<!--// Info button -->
+<a class="image" onclick="clicInfo()">
+	<img src="images/infobutton.png" alt="Informations" id="info" />
+</a>
+
+<!--// Button to hide/unhide the historical menu -->
+<a class="image" onclick="cacher()">
+	<img src="images/question.png" alt="Histoire" id="question" />
+</a>
+
+<!--// Button to activate/desactivate all the blocks (immersion mode) -->
+<a class="image" onclick="clicImmersion()">
+	<img src="images/immersion.png" alt="Immersion Mode" id="immersion" />
+</a>
+
+<!--// Info mode -->
+<div id="fondinfo">
+</div>
+<div id="panneauinfo">
+	<h2>Arts et métiers 360</h2>
+	<em>Réalisé par Florent Gros - Cluny 211 - Creative Commons 2014</em>
+	<p>Toute suggestion est la bienvenue ! de même, si tu possèdes une photosphère (réalisée avec un téléphone Android) et que tu souhaites la partager, tu peux l'envoyer à <em>
+	<script type="text/javascript">
+		var toto = "gorgu";
+		var plop = "gullfaxi";
+		var pouet = toto + "@" + plop +".fr";
+		melgen(pouet);
+	</script></em></p>
+	<p>Pour plus d'information sur l'école et ses traditions, tu peux contacter l'Ahclam de Cluny (Association Historique Clunisoise des Arts et Métiers).</p>
+	<br />
+	<p><em>"La tradition, ce n'est pas vénérer les cendres, c'est raviver les flammes."</em></p>
+</div>
+
+<!--// Toolbar to navigate between photospheres -->
 <div id="toolbar">
 
 <ul id="menu">
@@ -54,25 +96,33 @@
 
 </div>
 
-	<a class="image" onclick="cacher()">
-		<img src="images/question.png" alt="Histoire" id="question" />
-	</a>
-	
-	<div id = "encart">
-		<div id = "bandeau"><h3>La zacar'sss</h3></div>	
-		<div id = "texte">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tincidunt placerat felis, vel laoreet massa laoreet quis. Proin ac eros ut elit imperdiet convallis. Fusce dapibus tortor at dui semper convallis. Mauris vel dui vitae ante fermentum sagittis eget id purus. Proin sed leo pharetra, dapibus sem eget, tempus magna. Etiam mollis erat nec nisl sollicitudin pulvinar. Aliquam erat volutpat. Fusce in nibh at eros consectetur dignissim id ac neque. Pellentesque imperdiet, nisi ac hendrerit accumsan, orci urna posuere ligula, congue faucibus nisl leo eget massa. Duis euismod, nisi condimentum consequat dapibus, lectus diam iaculis magna, non tincidunt erat nibh vitae est. Phasellus et enim in leo condimentum volutpat.</p>
-		</div>
+
+<!--// Hstorical Menu -->
+<div id = "encart">
+	<div id = "bandeau"><h3>La zacar'sss</h3></div>	
+	<div id = "texte">
+		<p></p>
 	</div>
+</div>
 
+<!--// Three.js view-->
+<div id="sphere"></div>
 
-	<div id="sphere"></div>	
+<!--// Script to rule everything -->
 	<script>
 		
+		// hide history menu at start. (1 to unhide)
 		var encart = 0;
-		// hide the panel at start
 		document.getElementById('encart').style.visibility = "hidden";
 		document.getElementById('encart').style.overflow = "hidden";
+		
+		var infoStatus = 0;
+		var immersionStatus = 0;
+		
+		// Hide info menu at start
+		infoStatus = 0;
+		document.getElementById('fondinfo').style.visibility = "hidden";
+		document.getElementById('panneauinfo').style.visibility = "hidden";
 
 		// function to hide/unhide the history panel
 		function cacher()
@@ -82,14 +132,103 @@
 				document.getElementById('encart').style.visibility = "hidden";
 				document.getElementById('encart').style.overflow = "hidden";
 				encart = 0;
+				// show others
+				document.getElementById('immersion').style.visibility = "visible";
+				document.getElementById('info').style.visibility = "visible";
+				
+				
 				} else {
 					// show panel
 					document.getElementById('encart').style.visibility = "visible";
 					document.getElementById('encart').style.overflow = "hidden"; // scroll
 					encart = 1;
+					
+					// hide others
+					document.getElementById('info').style.visibility = "hidden";
+					document.getElementById('immersion').style.visibility = "hidden";
 				}
 		}
+		
+		function clicInfo(){
+			if( infoStatus == 0 ){
+				// Show info
+				infoStatus = 1;
+				document.getElementById('fondinfo').style.visibility = "visible";
+				document.getElementById('panneauinfo').style.visibility = "visible";
+				
+				// Hide others
+				encart = 0;
+				document.getElementById('encart').style.visibility = "hidden";
+				document.getElementById('menu').style.visibility = "hidden";
+				document.getElementById('toolbar').style.visibility = "hidden";
+				document.getElementById('question').style.visibility = "hidden";
+				document.getElementById('immersion').style.visibility = "hidden";
 
+				
+			} else {
+				// Hide info
+				infoStatus = 0;
+				document.getElementById('fondinfo').style.visibility = "hidden";
+				document.getElementById('panneauinfo').style.visibility = "hidden";
+				
+				// Show ohters buttons & menu
+				document.getElementById('menu').style.visibility = "visible";
+				document.getElementById('toolbar').style.visibility = "visible";
+				document.getElementById('question').style.visibility = "visible";
+				document.getElementById('immersion').style.visibility = "visible";
+
+				
+			}
+		}
+		
+		function clicImmersion(){
+			if( immersionStatus == 0 ){
+				// Show immersion mode
+				immersionStatus = 1;
+				
+				// Hide others
+				encart = 0;
+				document.getElementById('encart').style.visibility = "hidden";
+				document.getElementById('menu').style.visibility = "hidden";
+				document.getElementById('toolbar').style.visibility = "hidden";
+				document.getElementById('question').style.visibility = "hidden";
+				document.getElementById('info').style.visibility = "hidden";
+				document.getElementById('signature').style.visibility = "hidden";
+				
+			} else {
+				// Hide info
+				immersionStatus = 0;
+				
+				// Show ohters buttons & menu
+				document.getElementById('menu').style.visibility = "visible";
+				document.getElementById('toolbar').style.visibility = "visible";
+				document.getElementById('question').style.visibility = "visible";
+				document.getElementById('info').style.visibility = "visible";
+				document.getElementById('signature').style.visibility = "visible";
+				
+			}
+		}
+		
+		var textures = ['photospheres/cluny_cloitre.jpg',
+						  'photospheres/cluny_transept.jpg',
+						  'photospheres/cluny_zaronde.jpg',
+						  'photospheres/cluny_zabels.jpg',
+						  'photospheres/cluny_pips.jpg',
+						  'photospheres/cluny_circuitmh.jpg'
+		];
+		
+		var texturesSD = ['photospheres/cluny_cloitre_sd.jpg',
+						  'photospheres/cluny_transept_sd.jpg',
+						  'photospheres/cluny_zaronde_sd.jpg',
+						  'photospheres/cluny_zabels_sd.jpg',
+						  'photospheres/cluny_pips_sd.jpg',
+						  'photospheres/cluny_circuitmh_sd.jpg'
+		];
+		
+		// number of division of the sphere. The more, the cooler, the less, the faster
+		var resHD = 50, resSD = 20;
+
+		// three.js scene
 		var webglEl = document.getElementById('sphere');
 
 		var width  = window.innerWidth,
@@ -107,24 +246,6 @@
 		renderer.setSize(width, height);
 
 		var geometry = new THREE.SphereGeometry(100, 50, 50);
-	
-		var texturesHD = ['photospheres/cluny_cloitre.jpg',
-						  'photospheres/cluny_transept.jpg',
-						  'photospheres/cluny_zaronde.jpg',
-						  'photospheres/cluny_zabels.jpg',
-						  'photospheres/cluny_pips.jpg',
-						  'photospheres/cluny_circuitmh.jpg'
-		];
-		
-		var texturesSD = ['photospheres/cluny_cloitre_sd.jpg',
-						  'photospheres/cluny_transept_sd.jpg',
-						  'photospheres/cluny_zaronde_sd.jpg',
-						  'photospheres/cluny_zabels_sd.jpg',
-						  'photospheres/cluny_pips_sd.jpg',
-						  'photospheres/cluny_circuitmh_sd.jpg'
-		];
-		
-		var resHD = 50, resSD = 20;
 		
 		var currentMesh	= null
 		function switchValue(type){
@@ -211,7 +332,7 @@
 
 
 
-		// Fonction qui met à jours les tailles des cadres si on redimensionne la fenêtre
+		// Function to resize canvas when resizing window
 		function updateSize() {
 
 			if (windowWidth != window.innerWidth
