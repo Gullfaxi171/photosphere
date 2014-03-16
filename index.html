@@ -75,6 +75,12 @@
 			<li><a href="#" onclick='switchValue(this.innerHTML);'>Le tilleul d'Abélard</a></li>	
 			<li><a href="#" onclick='switchValue(this.innerHTML);'>Le "Pipelet"</a></li>
 			<li><a href="#" onclick='switchValue(this.innerHTML);'>L'Abbaye</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>La tour Fabry</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>Le cellier des moines</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>La salle capitulaire</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>Les portes de la ville</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>La grande gallerie</a></li>
+			<li><a href="#" onclick='switchValue(this.innerHTML);'>Les portes de l'Abbaye</a></li>
 		</ul>
 	</li>
 
@@ -298,6 +304,30 @@
 				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/kin_grandecour.jpg')});
 				texte.innerHTML ="<p>Suite au développement des chemins de fer, des bateaux à vapeur, de la construction d’ouvrages d’art, et des activités portuaires, le Ministère du Commerce demanda en 1838 l’avis aux élus du sud quant à l’installation d’une École d’Arts et Métiers dans leur région. Une intense compétition s’installa alors entre Nîmes, Marseille, Aix et Toulouse. Cette dernière remportait le maximum des suffrages en raison de sa localisation à mi-chemin entre les deux mers. Seulement, la ville n’avait pas de bâtiment libre facilement transformable et à peu de frais. Nîmes fut écartée en raison de sa faible industrialisation et la modeste subvention offerte par la ville. Restaient alors en compétition Marseille et Aix, cette dernière ayant l’avantage d’avoir un bâtiment libre : un monastère transformé en collège sous la Restauration.</p><p>C’est en 1843 que la Chambre vota la création d’une troisième École d’Arts et Métiers à Aix. Ainsi, Elle produirait le personnel nécessaire aux industries métallurgiques et mécaniques du sud, au P.L.M., à la marine marchande et à la marine nationale (dans les années 1860, plus de la moitié des officiers mécaniciens de la marine étaient issus des Écoles d’Arts et Métiers).</p>";
 				signature.innerHTML ="<p>BigBlackMan 163 Clun's 211 - Sory Traore</p>";
+		}else if( type === "La tour Fabry" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_tour_fabry.jpg')});
+				texte.innerHTML ="<p><em>Rédaction en cours</em></p>";
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
+		}else if( type === "Le cellier des moines" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_scellier_moines.jpg')});
+				texte.innerHTML ="<p><em>Rédaction en cours</em></p>";
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
+		}else if( type === "Les portes de l'Abbaye" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_entree_abbaye.jpg')});
+				texte.innerHTML ="<p><em>Rédaction en cours</em></p>";
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
+		}else if( type === "La grande gallerie" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_grande_gallerie.jpg')});
+				texte.innerHTML ="<p><em>Rédaction en cours</em></p>";
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
+		}else if( type === "La salle capitulaire" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_salle capitulaire.jpg')});
+				texte.innerHTML ="<p><em>Rédaction en cours</em></p>";
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
+		}else if( type === "Les portes de la ville" ){
+				var mesh = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('photospheres/cluny_porte_ville.jpg')});
+				texte.innerHTML ="<p><em>Rédaction en cours</em></p>";
+				signature.innerHTML ="<p>Gullfaxi 171 Clun's 211 - Florent Gros</p>";
 		}else	console.assert(false)
 			var sphere = new THREE.Mesh(geometry, mesh);
 			sphere.scale.x = -1;
